@@ -9,12 +9,35 @@
   </head>
 
   <body>
-    <div id="root">
+    <section id="headerWrap">
+<div id="header">
+  <div id="logo">
+    <i class="fas fa-tv fa-5x"> </i>
+<h1>TV Show</h1>
+  </div>
+
+  <div id="searchWrap">
+<select name="allShows" id="allshows"></select>
+<select name="tvlist" id="showlist"> </select>
+<input type="text" id="search" name="search" placeholder="Search" autocomplete="off">
+<span id="count"></span>
+  </div>
+</div>
+    </section>
+
+    <section id="episodes">
+<ul id="cards">
+  
+</ul>
+
+    </section>
+    <div id="source">
+      <a id="sourcewebsite" href="https://www.tvmaze.com/">Source</a>
     </div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
-
+<script src="shows.js"></script>
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>
