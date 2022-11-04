@@ -87,7 +87,6 @@ function createShowsSelectorOptions(allEpisodes) {
 }
 
 
-//27 Oct 
 showsSelector.addEventListener("change", (e) => {
   let showId = e.target.value;
   if (showId === "all") {
@@ -131,7 +130,7 @@ episodesSelector.addEventListener("change", (e) => {
   }, 2000);
 });
 
-//27 Oct - End
+
 
 
 function createLeaf(episode, type) {
@@ -185,11 +184,9 @@ function fillCards(episodeList, type) {
   });
 }
 
-// makePageForEpisodes(allEpisodes);
-
-// function makePageForEpisodes(episodeList) {
-//   const rootElem = document.getElementById("root");
-//   rootElem.textContent = `Got ${episodeList.length} episode(s)`;
-// }
 
 window.onload = setup;
+
+
+
+
