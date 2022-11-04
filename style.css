@@ -20,6 +20,7 @@ body {
   margin-top: 2rem;
   padding: 20px 20px; 
   background-color:rgb(192,199,200);
+
 }
 
 #showlist {
@@ -42,6 +43,7 @@ body {
   background-color: rgb(91, 107,106);
   padding: 6px;
   margin: 0 auto;
+  box-shadow: 15px 0 15px -4px rgb(179, 181, 187), -15px 0 10px -4px rgb(179, 181, 187);
 }
 
 .card {

@@ -21,6 +21,11 @@ function setup() {
   fillCards(showsSorted, "show");
 }
 
+//Getting data from API 
+function getEpisodes (showId) {
+  const endpoint = `https://api.tvmaze.com/shows/${showId}/episodes`;
+return fetch(endpoint).then((response) => response.json());
+}
 
 // Search function invoked
 searchInput.addEventListener("input", (e) => {
@@ -30,7 +35,7 @@ searchInput.addEventListener("input", (e) => {
   showCount(searchResult);
 });
 
-//Searching in names and summaries
+//Searching by typing word in names and summaries
 function search(word, episodes) {
   const filteredEpisodes = episodes.filter((episode) => {
     const { name, summary } = episode;
@@ -41,7 +46,7 @@ function search(word, episodes) {
   return filteredEpisodes;
 }
 
-// Function below count length both searched and allEpisodes arrays and show them on the screen
+// Function below count episodes searched and show the number of episodes found and all episodes  on the screen
 function showCount(searchedEpisodes) {
   const showCountElement = document.getElementById("count");
   const searchedEpisodesLength = searchedEpisodes.length;
@@ -49,6 +54,10 @@ function showCount(searchedEpisodes) {
   showCountElement.innerText = `Displaying ${searchedEpisodesLength}/${wholeEpisodesLength} episodes`;
 }
 
+function removeDisplayCount() {
+  const displayCountElement = document.getElementById("count");
+  displayCountElement.innerText = "";
+}
 
 //Seasons and episodes number convention
 function seasonsAndNumbers(episode) {
@@ -66,7 +75,7 @@ function createOptionShowList(episode) {
   option.innerText = episode.name;
   return option;
 }
-
+// Option Selector for shows
 function createShowsSelectorOptions(allEpisodes) {
   showsSelector.appendChild(
     createOptionShowList({ name: "all shows", id: "all" })
@@ -76,6 +85,54 @@ function createShowsSelectorOptions(allEpisodes) {
     showsSelector.appendChild(option);
   });
 }
+
+
+//27 Oct 
+showsSelector.addEventListener("change", (e) => {
+  let showId = e.target.value;
+  if (showId === "all") {
+    fillCards (allShows, "show");
+    removeDisplayCount();
+    episodeList([]);
+  } else { 
+    getEpisodes(showId).then((data) => {
+      allEpisodes = data;
+      fillCards(allEpisodes);
+      showCount(allEpisodes);
+      episodeList(allEpisodes);
+    });
+  }
+});
+
+function createOption(episode) {
+  const option = document.createElement("option");
+  option.setAttribute("value", episode.id);
+  let title = seasonsAndNumbers(episode);
+  option.innerText= title + `-${episode.name}`;
+  return option;
+}
+
+function episodeList(allEpisodes) {
+  episodesSelector.innerHTML = "";
+  allEpisodes.forEach((episode) => {
+    const option = createOption(episode);
+    episodesSelector.appendChild(option);
+  });
+}
+
+episodesSelector.addEventListener("change", (e) => {
+  let value = e.target.value;
+  console.log(value);
+  location.href = `#${value}`;
+  let clickedCard = document.getElementById(value);
+  clickedCard.classList.add("card--active");
+  setTimeout(() => {
+    clickedCard.classList.remove("card--active");
+  }, 2000);
+});
+
+//27 Oct - End
+
 
 function createLeaf(episode, type) {
   const li = document.createElement("li");
