@@ -46,6 +46,14 @@ body {
   box-shadow: 15px 0 15px -4px rgb(179, 181, 187), -15px 0 10px -4px rgb(179, 181, 187);
 }
 
+.leaf-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+
 .card {
   flex-direction: column;
   display: flex;
